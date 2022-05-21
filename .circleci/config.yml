@@ -10,29 +10,31 @@ jobs:
           name: "Showing my Variable"
           command: echo ${MY_USERNAME}
   
-    save_hello_world_output:
-      docker:
-        - image: cimg/base:stable
-      steps:
-        - run:
-          command: echo "Hello world" > output.txt 
-        - persist_to_workspace:
-            root: ~/
-            paths: 
-              - output.txt
+  save_hello_world_output:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+        command: echo "Hello world" > output.txt 
+      - persist_to_workspace:
+          root: ~/
+          paths: 
+            - output.txt
 
-    print_output_file:
-      docker:
-        - image: cimg/base:stable
-      steps:
-        - attach_workspace:
-            at: ~/
-        - run:
-          command: cat ~/output.txt
+  print_output_file:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+        command: cat ~/output.txt
 
 workflows:
-  test-env-vars:
+  my_workflow:
     jobs:
       - print_myVar
       - save_hello_world_output
-      - print_output_file
+      - print_output_file:
+          requires:
+            - save_hello_world_output
