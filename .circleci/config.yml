@@ -11,6 +11,6 @@ jobs:
           command: echo ${MY_USERNAME}
 
 workflows:
-  say-hello-workflow:
+  test-env-vars:
     jobs:
       - print_myVar
