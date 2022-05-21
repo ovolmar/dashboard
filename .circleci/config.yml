@@ -4,7 +4,7 @@ jobs:
   # Job Uno
   print_hello:
     docker:
-      - image: circleci/alpine
+      - image: cimg/base:stable
     steps:
       - run:
           name: "Running a stanky command"
@@ -20,7 +20,7 @@ jobs:
           command: echo "Ansible is supposed to run here now OK!, Eh OK"
   print_world:
     docker:
-      - image: circleci/node
+      - image: cimg/base:stable
     steps:
       - run:
           name: "Hey I am Groot"
