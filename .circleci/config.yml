@@ -8,7 +8,7 @@ jobs:
     steps:
       - run:
           name: "Showing my Variable"
-          command: echo $MY_USERNAME
+          command: echo ${MY_USERNAME}
 
 workflows:
   say-hello-workflow:
