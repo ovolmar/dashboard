@@ -1,0 +1,22 @@
+---
+#
+- name: creating dashboard dir --> {{ dashboard_dir }}
+  file:
+    path: "{{ dashboard_dir }}"
+    owner: "{{ splunk_user }}"
+    group: "{{ splunk_group }}"
+    mode: "0755"
+    state: directory
+
+- name: "Adding dashboards:  --> {{ dashboard_dir }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ dashboard_dir }}/{{ item.dst }}"
+    owner: "{{ splunk_user }}"
+    group: "{{ splunk_group }}"
+    mode: "0755"
+  with_items:
+    - {src: cie-team.xml.j2, dst: cie-team.xml }
+    - {src: noc.xml.j2, dst: noc.xml }
+    - {src: views.xml.j2, dst: views.xml }
+  

@@ -1,0 +1,6 @@
+---
+# defaults file for test
+
+dashboard_dir: /tmp/splunk/apps/views/ui
+splunk_user: jarvis
+splunk_group: jarvis
