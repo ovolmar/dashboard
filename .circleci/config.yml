@@ -14,8 +14,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - run:
-        command: echo "Hello world" > output.txt 
+      - run: echo "Hello world" > output.txt 
       - persist_to_workspace:
           root: ~/
           paths: 
@@ -27,8 +26,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run:
-        command: cat ~/output.txt
+      - run: cat ~/output.txt
 
 workflows:
   my_workflow:
