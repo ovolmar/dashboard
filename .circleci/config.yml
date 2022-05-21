@@ -1,26 +1,36 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  # Job Uno
+  print_hello:
+    docker:
+      - image: circleci/alpine
+    steps:
+      - run:
+          name: "Running a stanky command"
+          command: echo "** Eat your veggies ** "
+  # Job Dos
   say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - run:
           name: "Run the playbook"
-          command: ansible-playbook tests/deploy.yml -i localhost,
+          command: echo "Ansible is supposed to run here now OK!, Eh OK"
+  print_world:
+    docker:
+      - image: circleci/node
+    steps:
+      - run:
+          name: "Hey I am Groot"
+          command: echo "DEEZ NUTs"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
+      - print_hello
       - say-hello
+      - print_world
