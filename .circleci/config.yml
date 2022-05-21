@@ -17,13 +17,16 @@ jobs:
       - run:
         command: echo "Hello world" > output.txt 
       - persist_to_workspace:
-          root: ~/
+          root: ~/output.txt
+
   print_output_file:
     docker:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
           at: ~/
+      - run:
+        command: cat ~/output.txt
 
 workflows:
   test-env-vars:
