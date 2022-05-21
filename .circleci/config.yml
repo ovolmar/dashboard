@@ -9,6 +9,15 @@ jobs:
       - run:
           name: "Showing my Variable"
           command: echo ${MY_USERNAME}
+  
+  save_hello_world_output:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+        command: echo "Hello world" > output.txt 
+      - persist_to_workspace:
+          root: ~/
 
 workflows:
   test-env-vars:
